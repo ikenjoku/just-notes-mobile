@@ -1,16 +1,16 @@
 import React from 'react'
-import { View, Text, Button } from 'react-native'
+import { Text } from 'react-native'
+import { useQuery } from '@apollo/client'
+import { GET_NOTES } from '../gql/query'
+import { NoteFeed, Loading } from '../components'
 
 function Feeds(props) {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems:'center' }}>
-      <Text>Feeds</Text>
-      <Button
-        title='See More'
-        onPress={() => props.navigation.navigate('Note', { title: 'I got here' })}
-      ></Button>
-    </View>
-  )
+  const { loading, error, data } = useQuery(GET_NOTES)
+
+  if (loading) return <Loading />
+  if (error) return <Text>Error loading notes</Text>
+
+  return <NoteFeed notes={data.notes} navigation={props.navigation} />
 }
 
 Feeds.navigationOptions = {
