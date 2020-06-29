@@ -2,6 +2,7 @@
   "expo": {
     "name": "just-notes",
     "slug": "just-notes",
+    "description": "Mobile application for JustNotes manager",
     "platforms": [
       "ios",
       "android",
@@ -12,17 +13,20 @@
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#4A90E2"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 1500
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.ikenjoku.just-notes"
     }
   }
 }
