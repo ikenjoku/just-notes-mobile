@@ -1,19 +1,35 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client'
+import Screens from './screens'
+import getEnvVars from '../config'
+import * as SecureStore from 'expo-secure-store'
+import { setContext } from 'apollo-link-context'
 
-export default function App() {
+const { API_URI } = getEnvVars()
+
+const uri = API_URI
+const httpLink = createHttpLink({ uri })
+const cache = new InMemoryCache()
+
+const authLink = setContext(async (_, { headers }) => {
+  return {
+    headers: {
+      ...headers,
+      authorization: (await SecureStore.getItemAsync('token')) || ''
+    }
+  }
+})
+
+const client = new ApolloClient({
+  uri,
+  cache,
+  link: authLink.concat(httpLink)
+})
+
+export default function Main() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+    <ApolloProvider  client={client}>
+      <Screens />
+    </ApolloProvider>
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
