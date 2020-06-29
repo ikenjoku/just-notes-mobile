@@ -4,13 +4,14 @@ import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createStackNavigator } from 'react-navigation-stack'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 //screens
+import AuthLoading from './authloading'
 import Favorites from './favorites'
+import Settings from './settings'
 import MyNotes from './mynotes'
+import SignIn from './signin'
+import SignUp from './signup'
 import Feeds from './feeds'
 import Note from './note'
-import AuthLoading from './authloading'
-import Settings from './settings'
-import SignIn from './signin'
 
 const FeedStack = createStackNavigator({
   Feed: Feeds,
@@ -28,8 +29,9 @@ const MyNoteStack = createStackNavigator({
 })
 
 const AuthStack = createStackNavigator({
-  SignIn: SignIn
-});
+  SignIn: SignIn,
+  SignUp: SignUp
+})
 
 const SettingsStack = createStackNavigator({
   Settings: Settings
