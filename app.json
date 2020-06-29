@@ -26,7 +26,7 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.ikenjoku.just-notes"
+      "package": "com.ikenjoku.just_notes"
     }
   }
 }
